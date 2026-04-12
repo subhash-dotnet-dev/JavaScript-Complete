@@ -1,0 +1,15 @@
+<script>
+  'use strict';
+  function f1() {
+    let x = 10; // intialization
+    if (x == 10) {
+      let x = 20;
+      //    let x = 30;  invalid + shadowing not allowed
+
+      let y; // declaration
+      y = 20; // rendering
+      document.write('X=' + x + '<br>' + 'Y=' + y);
+    }
+  }
+  f1();
+</script>

@@ -1,0 +1,14 @@
+<script>
+  'use strict';
+  function f1() {
+    var x = 10;
+    if (x == 10) {
+      var x; // shadowing
+      x = 30;
+      var y;
+      y = 20;
+    }
+    document.write('X=' + x + '<br>' + 'Y=' + y);
+  }
+  f1();
+</script>

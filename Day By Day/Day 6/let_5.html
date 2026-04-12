@@ -1,0 +1,31 @@
+<script>
+  'use strict';
+  function f1() {
+    let x = 10;
+    if (x == 10) {
+      let y;
+      y = 20;
+    }
+    document.write('X=' + x + '<br>' + 'Y=' + y); // Error: y not defined.
+  }
+  f1();
+</script>
+// In the above code, we are trying to access the variable y outside its block
+scope, which results in a ReferenceError because y is not defined in that scope.
+/*-------------------------------------------------------------------------------------*/
+
+<script>
+  'use strict';
+  function f1() {
+    let x = 10;
+    if (x == 10) {
+      let y;
+      y = 20;
+      document.write('X=' + x + '<br>' + 'Y=' + y); // valid
+    }
+  }
+  f1();
+</script>
+
+// In the above code, we are accessing the variable y within its block scope,
+which is valid and does not result in an error.
