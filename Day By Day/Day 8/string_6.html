@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String</title>
+    <script>
+        function Calculate() {
+            var txt1 = document.getElementById("txt1").value;
+            var txt2 = document.getElementById("txt2").value;
+            document.getElementById("result").innerHTML = parseFloat(txt1) + parseFloat(txt2);
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt><label for="txt1">Number-1</label></dt>
+        <dd><input id="txt1" type="text" placeholder="0"></dd>
+
+        <dt><label for="txt2">Number-2</label></dt>
+        <dd><input id="txt2" type="text" placeholder="0"></dd>
+    </dl>
+    <button onclick="Calculate()">Calculate</button>
+    <h2 id="result"></h2>
+</body>
+</html>
