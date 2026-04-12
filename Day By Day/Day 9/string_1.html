@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Demo</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function VerifyName() {
+            var txtName = document.getElementById("txtName").value;
+            var msg = document.getElementById("msg");
+            if (txtName.length > 0) {
+                var firstCharCode = txtName.charCodeAt(0);
+                // A-Z check
+                if (firstCharCode >= 65 && firstCharCode <= 90) {
+                    msg.innerHTML = "";
+                } else {
+                    msg.innerHTML = "Name must start with Uppercase Letter";
+                }
+            } else {
+                msg.innerHTML = "";
+            }
+        }
+
+        function VerifyCard() {
+            var txtCard = document.getElementById("txtCard").value;
+            var firstChar = txtCard.charAt(0);
+            var cardLogo = document.getElementById("cardLogo");
+
+            // Aapke Explorer ke hisaab se paths aur .jpg extensions:
+            if (firstChar == "4") {
+                cardLogo.src = "../../src/assets/images/visa card.jpg";
+                cardLogo.alt = "Visa Card";
+            } else if (firstChar == "5") {
+                cardLogo.src = "../../src/assets/images/master card.jpg";
+                cardLogo.alt = "Master Card";
+            } else if (txtCard.length > 0) {
+                cardLogo.src = "../../src/assets/images/invalid card.jpg"; // Default/Invalid image
+                cardLogo.alt = "Invalid Card";
+            } else {
+                cardLogo.src = ""; // Khali hone par image hata de
+                cardLogo.alt = "";
+            }
+        }
+    </script>
+</head>
+<body class="container-fluid">
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="txtName">User Name</label>
+                <input onblur="VerifyName()" class="form-control"
+                       placeholder="Name must start with Uppercase Letter"
+                       type="text" id="txtName">
+                <div id="msg" class="text-danger"></div>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="txtCard">Card Number</label>
+                <div class="input-group">
+                    <input onkeyup="VerifyCard()" type="text" id="txtCard" class="form-control" placeholder="Enter card number">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <img id="cardLogo" width="40" height="20" alt="">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

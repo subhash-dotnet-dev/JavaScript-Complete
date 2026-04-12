@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Demo</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <script>
+        function VerifyName() {
+            var txtName = document.getElementById("txtName").value;
+            var msg = document.getElementById("msg");
+
+            if (txtName.length === 0) return;
+
+            var firstCharCode = txtName.charCodeAt(0);
+
+            if (firstCharCode >= 65 && firstCharCode <= 90) {
+                msg.innerHTML = "";
+            } else {
+                msg.innerHTML = "Name must start with Uppercase Letter";
+            }
+        }
+
+        function VerifyCard() {
+            var txtCard = document.getElementById("txtCard").value;
+            var firstChar = txtCard.charAt(0);
+            var cardLogo = document.getElementById("cardLogo");
+
+            if (firstChar === "4") {
+                cardLogo.src = "../../src/assets/images/visa card.jpg";
+            } else if (firstChar === "5") {
+                cardLogo.src = "../../src/assets/images/master card.jpg";
+            } else {
+                cardLogo.src = "../../src/assets/images/invalid card.jpg";
+            }
+        }
+
+        function VerifyEmail() {
+            var txtEmail = document.getElementById("txtEmail").value;
+            var emailError = document.getElementById("emailError");
+
+            var atPos = txtEmail.indexOf("@");
+            var dotPos = txtEmail.lastIndexOf(".");
+
+            if (atPos <= 2 || (dotPos - atPos) <= 2) {
+                emailError.innerHTML = "Invalid Email Format";
+            } else {
+                emailError.innerHTML = "Email Verified";
+            }
+        }
+    </script>
+</head>
+
+<body class="container-fluid">
+
+    <!-- Name -->
+    <div class="form-group">
+        <label for="txtName">User Name</label>
+        <input onblur="VerifyName()"
+               id="txtName"
+               class="form-control"
+               type="text"
+               placeholder="Enter Name (Start with Capital)"
+               title="Name must start with uppercase letter">
+        <div id="msg" class="text-danger"></div>
+    </div>
+
+    <!-- Card -->
+    <div class="form-group">
+        <label for="txtCard">Card Number</label>
+        <div class="input-group">
+            <input onkeyup="VerifyCard()"
+                   id="txtCard"
+                   class="form-control"
+                   type="text"
+                   placeholder="Enter Card Number"
+                   title="Enter card number">
+            <div class="input-group-append">
+                <span class="input-group-text">
+                    <img id="cardLogo" width="50" height="20" alt="Card Logo">
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+        <label for="txtEmail">Email</label>
+        <input onblur="VerifyEmail()"
+               id="txtEmail"
+               class="form-control"
+               type="text"
+               placeholder="Enter Email"
+               title="Enter valid email">
+        <div id="emailError" class="text-danger"></div>
+    </div>
+
+</body>
+</html>
