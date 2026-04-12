@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .effects {
+        background-color: yellow;
+      }
+    </style>
+    <title>Reference</title>
+    <script type="text/javascript">
+      function DeleteClick() {
+        x = confirm('Are you sure want to Delete?');
+        if (x == true) {
+          document.write('Record Deleted');
+        } else {
+          alert('Canceled..');
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="DeleteClick()">Delete</button>
+  </body>
+</html>

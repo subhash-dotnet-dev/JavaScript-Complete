@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .effects {
+        background-color: yellow;
+      }
+    </style>
+    <title>Reference</title>
+    <script type="text/javascript">
+      function DeleteClick() {
+        x = confirm('Are you sure want to Delete?');
+        console.info('Delete Initiated');
+        if (x == true) {
+          console.error('Delete Completed');
+          document.getElementById('msg').outerHTML =
+            "<h2><font color='red'>Record Deleted</font></h2>";
+        } else {
+          alert('Canceled..');
+          console.warn('Canceld action');
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="DeleteClick()">Delete</button>
+    <p align="center" id="msg"></p>
+  </body>
+</html>
