@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JavaScript ClassName Reference</title>
+
+        <style>
+            /* Saari CSS yahan ek hi style tag mein rakhein */
+            .effects {
+                background-color: yellow;
+            }
+            .img-box {
+                margin-bottom: 20px;
+            }
+            .form-row {
+                margin-bottom: 10px;
+            }
+        </style>
+
+        <script type="text/javascript">
+            function bodyload(){
+                // Image source set karna
+                document.getElementById("pic").src = "../../src/assets/images/green_grass.jpg";
+
+                // ClassName count alert
+                var x = document.getElementsByClassName("effects");
+                alert("Total elements with 'effects' class: " + x.length);
+            }
+        </script>
+    </head>
+    <body onload="bodyload()">
+        <div class="img-box">
+            <img id="pic" width="200" height="150" border="1" alt="Preview Picture">
+        </div>
+
+        <div>
+            <h2>Register User</h2>
+            <form id="frmRegister">
+                <div class="form-row">
+                    User Name:
+                    <input class="effects" id="txtName" type="text" placeholder="Enter your name">
+                </div>
+                <div>
+                    <input class="effects" id="btnRegister" type="button" value="Register">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

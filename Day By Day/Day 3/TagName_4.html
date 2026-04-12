@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reference - Tag Name</title>
+    <script type="text/javascript">
+      function bodyload() {
+        // 1. Image ka source set karna
+        // Dhayan dein: "../../src/assets/images/green_grass.jpg" wahi path hai jo aapne pehle use kiya tha
+        document.getElementById("pic").src = "../../src/assets/images/green_grass.jpg";
+
+        // 2. Tag name se count check karna
+        var x = document.getElementsByTagName('img');
+        alert('Total Number of Images: ' + x.length);
+      }
+    </script>
+  </head>
+  <body onload="bodyload()">
+    <div>
+      <img id="pic" width="100" height="100" border="1" alt="Picture" />
+    </div>
+    <div>
+      <h2>Register</h2>
+      <form id="frmRegister">
+        <label for="txtName">User Name:</label>
+        <input id="txtName" type="text" placeholder="Enter your username" />
+        <input id="btnRegister" type="button" value="Register" />
+      </form>
+    </div>
+  </body>
+</html>

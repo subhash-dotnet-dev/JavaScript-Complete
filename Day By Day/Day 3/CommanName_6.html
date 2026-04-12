@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .effects {
+        background-color: yellow;
+      }
+    </style>
+    <title>Reference</title>
+    <script type="text/javascript">
+      function bodyload() {
+        x = document.getElementsByName('pay');
+        alert('Total Payment Methods: ' + x.length);
+      }
+    </script>
+  </head>
+  <body onload="bodyload()">
+    <fieldset>
+      <legend>Payment</legend>
+      <label><input type="radio" name="pay" value="Cash" title="Cash payment method" /> Cash</label>
+      <label><input type="radio" name="pay" value="UPI" title="UPI payment method" /> UPI</label>
+      <label><input type="radio" name="pay" value="Credit Card" title="Credit Card payment method" /> Credit Card</label>
+    </fieldset>
+  </body>
+</html>
