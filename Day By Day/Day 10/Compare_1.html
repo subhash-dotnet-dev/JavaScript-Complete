@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare</title>
+    <style>
+        .status-message {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
+    <script>
+        function VerifyPassword(){
+            var pwd = document.getElementById("txtPwd").value;
+            var cPwd = document.getElementById("txtConfirm").value;
+            var lblError = document.getElementById("lblError");
+
+            if(pwd === "" || cPwd === "") {
+                lblError.innerHTML = "";
+                return;
+            }
+
+            if(pwd === cPwd) {
+                lblError.innerHTML = "Password Verified";
+                lblError.style.color = "green";
+            } else {
+                lblError.innerHTML = "Password Mismatch";
+                lblError.style.color = "red";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-3">
+        <div>
+            <label for="txtPwd">Password</label>
+            <input type="password" id="txtPwd" class="form-control">
+        </div>
+        <div class="mt-2">
+            <label for="txtConfirm">Confirm Password</label>
+            <input type="password" id="txtConfirm" class="form-control" onkeyup="VerifyPassword()">
+            <div id="lblError" class="status-message"></div>
+        </div>
+    </div>
+</body>
+</html>
