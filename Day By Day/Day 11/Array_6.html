@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFC Order Form | Array Operations</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <style>
+        /* Inline styles ko internal CSS mein move kiya gaya hai warnings hatane ke liye */
+        body { background-color: darkred; color: white; }
+        section { margin-top: 20px; padding: 0 5%; }
+        .header-banner { height: 150px; width: 100%; object-fit: cover; }
+        .food-img { width: 100%; height: 160px; object-fit: cover; border-radius: 5px; }
+        .card { color: black; margin-bottom: 10px; }
+        .modal-body { color: black; }
+    </style>
+
+    <script>
+        var categories = ["All", "Electronics", "Footwear"];
+
+        function bodyload(){
+            var lstCategories = document.getElementById("lstCategories");
+            var optCategories = document.getElementById("optCategories");
+
+            lstCategories.innerHTML = "";
+            optCategories.innerHTML = "";
+
+            for(var item of categories) {
+                var li = document.createElement("li");
+                li.innerHTML = item;
+                li.className = "list-group-item";
+                lstCategories.appendChild(li);
+
+                var option = document.createElement("option");
+                option.text = item;
+                option.value = item;
+                optCategories.appendChild(option);
+            }
+        }
+
+        function RemoveSelected(){
+            var selectElement = document.getElementById("optCategories");
+            var selectedItem = selectElement.value;
+            if(!selectedItem) return alert("Please select an item!");
+
+            var selectedIndex = categories.indexOf(selectedItem);
+            if(confirm(`Delete ${selectedItem}?`)) {
+                categories.splice(selectedIndex, 1);
+                bodyload();
+            }
+        }
+    </script>
+</head>
+<body onload="bodyload()" class="container-fluid">
+    <header class="mt-2 text-center">
+        <img src="../../src/assets/images/flower_blue.jpg" class="header-banner img-fluid" alt="KFC Promotion Banner">
+    </header>
+
+    <section class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card p-3 shadow-sm">
+                <h3 class="h5">Select & Action</h3>
+                <div class="mb-3">
+                    <label for="optCategories" class="form-label">Manage Categories</label>
+                    <select size="5" class="form-select" id="optCategories" aria-label="Category Selection">
+                        </select>
+                </div>
+                <button onclick="RemoveSelected()" class="btn btn-outline-danger w-100">Remove Selected</button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header"><h5>OMG Burger</h5></div>
+                <div class="card-body">
+                    <img src="../../src/assets/images/omg burger.jpg" class="food-img" alt="OMG Burger">
+                </div>
+                <div class="card-footer">
+                    <div class="form-check d-flex justify-content-center">
+                        <input class="form-check-input" name="meal" id="optBurger" value="OMG Burger" type="radio">
+                        <label class="form-check-label ms-2" for="optBurger"> &#8377; 130/-</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header"><h5>OMG Roller</h5></div>
+                <div class="card-body">
+                    <img src="../../src/assets/images/green_grass.jpg" class="food-img" alt="OMG Roller">
+                </div>
+                <div class="card-footer">
+                    <div class="form-check d-flex justify-content-center">
+                        <input class="form-check-input" name="meal" id="optRoller" value="OMG Roller" type="radio">
+                        <label class="form-check-label ms-2" for="optRoller"> &#8377; 100/-</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

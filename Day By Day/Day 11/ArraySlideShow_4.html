@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Show</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <style>
+        .card { max-width: 650px; margin: 30px auto; }
+        #pic { object-fit: contain; border-radius: 10px; }
+        .card-body { display: flex; align-items: center; justify-content: space-between; }
+    </style>
+
+    <script>
+        // Images aur Names ke arrays
+        var products = ["../../src/assets/images/speaker.jpg", "../../src/assets/images/earbuds.jpg","../../src/assets/images/shoes.jpg", "../../src/assets/images/shirts.jpg"];
+        var productNames = ["JBL Speaker", "Earpods", "Nike Casuals", "Shirt"];
+        var index = 0;
+
+        function loadImage(idx) {
+            // Global index ko update karein taaki buttons aur range sync rahein
+            index = idx;
+
+            // Image aur Text update
+            document.getElementById("pic").src = products[index];
+            document.getElementById("lblName").innerHTML = productNames[index];
+
+            // Range slider ko index ke saath sync karein
+            document.getElementById("txtRange").value = index;
+        }
+
+        function NextClick() {
+            index++;
+            // Agar array khatam ho jaye to wapas 0 par jayein
+            if (index == products.length) {
+                index = 0;
+            }
+            loadImage(index);
+        }
+
+        function PreviousClick() {
+            index--;
+            // Agar 0 se peeche jayein to last image par jayein
+            if (index < 0) {
+                index = products.length - 1;
+            }
+            loadImage(index);
+        }
+
+        function RangeChange() {
+            var val = parseInt(document.getElementById("txtRange").value);
+            loadImage(val);
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="loadImage(0)">
+
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white text-center">
+            <h3 id="lblName">Product Name</h3>
+        </div>
+
+        <div class="card-body bg-light">
+            <button onclick="PreviousClick()" class="btn btn-outline-danger btn-lg">
+                <span class="fw-bold">&lt;</span>
+            </button>
+
+            <img id="pic" width="450" height="350" alt="product" class="img-thumbnail">
+
+            <button onclick="NextClick()" class="btn btn-outline-danger btn-lg">
+                <span class="fw-bold">&gt;</span>
+            </button>
+        </div>
+
+        <div class="card-footer text-center">
+            <label for="txtRange" class="form-label text-muted">Slide to browse</label>
+            <input oninput="RangeChange()" class="form-range" id="txtRange" type="range" min="0" value="0" max="3">
+        </div>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

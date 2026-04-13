@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Integration</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <script>
+        var categories = ["All", "Electronics", "Footwear", "Fashion", "Accessories"];
+
+        function bodyload(){
+            var lstCategories = document.getElementById("lstCategories");
+            var optCategories = document.getElementById("optCategories");
+
+            for(var item of categories) {
+                // 1. List Item create karna (Bootstrap classes ke saath)
+                var li = document.createElement("li");
+                li.innerHTML = item;
+                li.className = "list-group-item"; // List ko achha dikhane ke liye
+                lstCategories.appendChild(li);
+
+                // 2. Dropdown Option create karna
+                var option = document.createElement("option");
+                option.text = item;
+                option.value = item;
+                optCategories.appendChild(option);
+            }
+        }
+    </script>
+</head>
+<body onload="bodyload()" class="container-fluid p-4">
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <h3 class="mb-3">Categories List</h3>
+            <ol id="lstCategories" class="list-group list-group-numbered text-dark">
+                </ol>
+        </div>
+
+        <div class="col-md-6">
+            <h3 class="mb-3">Select Category</h3>
+            <div class="mb-3">
+                <label for="optCategories" class="form-label text-dark">Choose from dropdown:</label>
+                <select class="form-select" id="optCategories">
+                    </select>
+            </div>
+        </div>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
