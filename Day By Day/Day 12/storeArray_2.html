@@ -1,0 +1,41 @@
+<script>
+    var methods = []; // Global variable
+
+    function f1() {
+        methods = [
+            function () {
+                return 'Hello !';
+            },
+            function (a, b) {
+                return a + b;
+            },
+        ];
+    }
+
+    f1(); // Pehle function call karein taaki array fill ho jaye
+
+    document.write(methods[0]() + '<br>'); // Output: Hello !
+    document.write(methods[1](10, 20));    // Output: 30
+</script>
+
+
+
+<script>
+    function f1() {
+        var methods = [
+            function () {
+                return 'Hello !';
+            },
+            function (a, b) {
+                return a + b;
+            },
+        ];
+        return methods; // Array bahar bhejein
+    }
+
+    var myMethods = f1(); // Function call karke result store karein
+
+    document.write(myMethods[0]() + '<br>'); // Output: Hello !
+    document.write(myMethods[1](10, 20));    // Output: 30
+</script>
+
