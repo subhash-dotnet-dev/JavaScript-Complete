@@ -1,29 +1,29 @@
 <script>
-    function f1() {
-        // Humne array ko return kiya hai taaki bahar use kiya ja sake
-        var methods = [
-            function () {
-                return 'Hello !';
-            },
-            function (a, b) {
-                return a + b;
-            },
-        ];
-        return methods;
-    }
+  function f1() {
+    // Humne array ko return kiya hai taaki bahar use kiya ja sake
+    var methods = [
+      function () {
+        return 'Hello !';
+      },
+      function (a, b) {
+        return a + b;
+      },
+    ];
+    return methods;
+  }
 
-    // Function call karke methods ko ek variable mein store kiya
-    var methods = f1();
+  // Function call karke methods ko ek variable mein store kiya
+  var methods = f1();
 
-    document.write("<h3>Without Destructuring</h3>");
-    var m1 = methods[0];
-    var m2 = methods[1];
-    document.write(m1() + '<br>');      // Output: Hello !
-    document.write(m2(10, 30) + '<br>'); // Output: 40
+  document.write('<h3>Without Destructuring</h3>');
+  var m1 = methods[0];
+  var m2 = methods[1];
+  document.write(m1() + '<br>'); // Output: Hello !
+  document.write(m2(10, 30) + '<br>'); // Output: 40
 
-    document.write("<h3>With Destructuring</h3>");
-    // Array Destructuring ka use karke functions ko alag variables mein nikala
-    var [x1, x2] = methods;
-    document.write(x1() + '<br>');      // Output: Hello !
-    document.write(x2(10, 20));         // Output: 30
+  document.write('<h3>With Destructuring</h3>');
+  // Array Destructuring ka use karke functions ko alag variables mein nikala
+  var [x1, x2] = methods;
+  document.write(x1() + '<br>'); // Output: Hello !
+  document.write(x2(10, 20)); // Output: 30
 </script>
