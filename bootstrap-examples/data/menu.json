@@ -1,0 +1,15 @@
+[
+    {
+        "category": "Electronics",
+         "Products": ["Samsung TV", "iPhone", "Laptop"]
+    },
+    {
+        "category": "Clothing",
+         "Products": ["T-shirt", "Jeans", "Jacket"]
+    },
+    {
+        "category": "Books",
+         "Products": ["Fiction", "Non-fiction", "Comics"]
+    }
+
+]
