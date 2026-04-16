@@ -1,0 +1,31 @@
+<script>
+  function f1() {
+    var products = [
+      {
+        Name: 'TV',
+        Price: 45000.44,
+        Cities: ['Delhi', 'Hyd'],
+        Category: 'Electronics',
+      },
+      {
+        Name: 'Mobile',
+        Price: 12000.33,
+        Cities: ['Hyd', 'Chennai'],
+        Category: 'Electronics',
+      },
+      {
+        Name: 'Nike Casuals',
+        Price: 4000.44,
+        Cities: ['Chennai', 'Hyd'],
+        Category: 'Footwear',
+      },
+    ];
+    var result = products.filter(function (product) {
+      return product.Category == 'Electronics';
+    });
+    for (var item of result) {
+      document.write(item.Name + '-' + item.Price + '<br>');
+    }
+  }
+  f1();
+</script>

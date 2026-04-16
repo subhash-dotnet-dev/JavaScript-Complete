@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Table - Product Details</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+
+    <script>
+      // Data Source: Path ko aapke folder structure (src/assets/images) ke hisaab se update kiya gaya hai
+      var products = [
+        {
+          Name: 'JBL Speaker',
+          Price: 4500.55,
+          Photo: '../../src/assets/images/speaker.jpg',
+        },
+        {
+          Name: 'Earpods',
+          Price: 2500.55,
+          Photo: '../../src/assets/images/earbuds.jpg',
+        },
+        {
+          Name: 'Nike Casuals',
+          Price: 6500.55,
+          Photo: '../../src/assets/images/shoes.jpg',
+        },
+        {
+          Name: 'Lee Boot',
+          Price: 1500.55,
+          Photo: '../../src/assets/images/home.jpg',
+        },
+      ];
+
+      function bodyload() {
+        var tbody = document.getElementById('tbody');
+        // Clear existing content to prevent duplication on reload
+        tbody.innerHTML = '';
+
+        for (var item of products) {
+          var tr = document.createElement('tr');
+
+          var tdName = document.createElement('td');
+          var tdPrice = document.createElement('td');
+          var tdPhoto = document.createElement('td');
+
+          // Text Content assignment
+          tdName.innerHTML = item.Name;
+          // Currency format (Indian Rupee)
+          tdPrice.innerHTML = '&#8377; ' + item.Price.toLocaleString('en-IN');
+
+          // Image Element Creation
+          var pic = new Image();
+          pic.src = item.Photo;
+          pic.alt = item.Name; // Accessibility fix
+          pic.height = 50;
+          pic.width = 50;
+          pic.className = 'img-thumbnail'; // Bootstrap styling for images
+
+          tdPhoto.appendChild(pic);
+
+          // Appending columns to row
+          tr.appendChild(tdName);
+          tr.appendChild(tdPrice);
+          tr.appendChild(tdPhoto);
+
+          // Appending row to tbody
+          tbody.appendChild(tr);
+        }
+      }
+    </script>
+  </head>
+  <body onload="bodyload()" class="container-fluid p-4">
+    <div class="card shadow">
+      <div class="card-header bg-primary text-white">
+        <h2 class="h4 mb-0">Product Inventory Details</h2>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-striped align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>Product Name</th>
+                <th>Price (INR)</th>
+                <th>Preview</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

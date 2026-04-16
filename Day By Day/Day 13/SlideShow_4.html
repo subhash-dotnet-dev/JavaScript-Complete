@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Slide Show</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+
+    <style>
+      /* Card aur Images ke liye clean styles */
+      .card {
+        max-width: 600px;
+        margin: 40px auto;
+        border-radius: 15px;
+        box-shadow:
+          0 10px 20px rgba(0, 0, 0, 0.19),
+          0 6px 6px rgba(0, 0, 0, 0.23);
+      }
+      #pic {
+        object-fit: contain;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        transition: 0.3s;
+      }
+      .card-body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+      }
+      .price-tag {
+        color: #198754;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+    </style>
+
+    <script>
+      // Data Source: Array of Objects with paths from your 'src/assets/images' folder
+      var products = [
+        {
+          Name: 'Flower Blue',
+          Price: 1500.0,
+          Photo: '../../src/assets/images/flower_blue.jpg',
+        },
+        {
+          Name: 'Car Buds',
+          Price: 2500.55,
+          Photo: '../../src/assets/images/park_man.jpg',
+        },
+        {
+          Name: 'JBL Speaker',
+          Price: 4500.55,
+          Photo: '../../src/assets/images/speaker.jpg',
+        },
+        {
+          Name: 'Lee Boot',
+          Price: 3500.0,
+          Photo: '../../src/assets/images/shoes.jpg',
+        },
+        {
+          Name: 'Nike Shoe',
+          Price: 6500.55,
+          Photo: '../../src/assets/images/cloud.jpg',
+        },
+        {
+          Name: 'Lee Boot Alternative',
+          Price: 3800.0,
+          Photo: '../../src/assets/images/laptop_man.jpg',
+        },
+        {
+          Name: 'Stylish Shirt',
+          Price: 1800.0,
+          Photo: '../../src/assets/images/shirts.jpg',
+        },
+      ];
+
+      var index = 0;
+
+      function loadImage(idx) {
+        // Global index ko update karein taaki buttons aur range sync rahein
+        index = idx;
+
+        // DOM Elements
+        var pic = document.getElementById('pic');
+        var lblName = document.getElementById('lblName');
+        var lblPrice = document.getElementById('lblPrice');
+        var txtRange = document.getElementById('txtRange');
+
+        // Data Mapping
+        pic.src = products[index].Photo;
+        lblName.innerHTML = products[index].Name;
+        lblPrice.innerHTML =
+          '&#8377; ' + products[index].Price.toLocaleString('en-IN');
+
+        // Slider ko current index par set karein
+        txtRange.value = index;
+      }
+
+      function NextClick() {
+        index++;
+        // Circular Logic: Last ke baad First par aana
+        if (index == products.length) {
+          index = 0;
+        }
+        loadImage(index);
+      }
+
+      function PreviousClick() {
+        index--;
+        // Circular Logic: First se peeche Last par jaana
+        if (index < 0) {
+          index = products.length - 1;
+        }
+        loadImage(index);
+      }
+
+      function RangeChange() {
+        var val = parseInt(document.getElementById('txtRange').value);
+        loadImage(val);
+      }
+    </script>
+  </head>
+  <body class="container-fluid bg-secondary" onload="loadImage(0)">
+    <div class="card shadow-lg">
+      <div class="card-header bg-dark text-white text-center p-3">
+        <h3 id="lblName" class="m-0">Product Name</h3>
+      </div>
+
+      <div class="card-body bg-white">
+        <button
+          onclick="PreviousClick()"
+          class="btn btn-outline-danger btn-lg rounded-circle"
+          aria-label="Previous Slide"
+        >
+          <span class="fw-bold">&lt;</span>
+        </button>
+
+        <img
+          id="pic"
+          width="350"
+          height="300"
+          alt="Product Display"
+          class="img-fluid"
+        />
+
+        <button
+          onclick="NextClick()"
+          class="btn btn-outline-danger btn-lg rounded-circle"
+          aria-label="Next Slide"
+        >
+          <span class="fw-bold">&gt;</span>
+        </button>
+      </div>
+
+      <div class="card-footer bg-light text-center p-4">
+        <div id="lblPrice" class="price-tag mb-3 text-success">Price</div>
+
+        <div class="mt-2">
+          <label for="txtRange" class="form-label text-muted small d-block mb-1"
+            >Slide to explore all products</label
+          >
+          <input
+            oninput="RangeChange()"
+            class="form-range"
+            id="txtRange"
+            type="range"
+            min="0"
+            value="0"
+            max="6"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

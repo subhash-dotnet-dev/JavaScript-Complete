@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KFC Product Catalog | Dynamic List & Table</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+
+    <style>
+      body {
+        background-color: #f4f4f4;
+      }
+      .food-img {
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .card {
+        transition: transform 0.2s;
+        border: none;
+      }
+      .card:hover {
+        transform: scale(1.02);
+      }
+      .price-text {
+        font-weight: bold;
+        color: #d32f2f;
+      }
+    </style>
+
+    <script>
+      // Data Source: Nested Objects for Categories and Products
+      var data = [
+        {
+          Category: 'Electronics',
+          Products: [
+            {
+              Name: 'JBL Speaker',
+              Price: 4500,
+              Photo: '../../src/assets/images/speaker.jpg',
+            },
+            {
+              Name: 'Earpods',
+              Price: 2500,
+              Photo: '../../src/assets/images/earbuds.jpg',
+            },
+          ],
+        },
+        {
+          Category: 'Fashion',
+          Products: [
+            {
+              Name: 'Nike Casuals',
+              Price: 6500,
+              Photo: '../../src/assets/images/shoes.jpg',
+            },
+            {
+              Name: 'Flower Blue',
+              Price: 1200,
+              Photo: '../../src/assets/images/flower_blue.jpg',
+            },
+          ],
+        },
+      ];
+
+      function bodyload() {
+        var catalogContainer = document.getElementById('catalogContainer');
+        catalogContainer.innerHTML = ''; // Clear existing content
+
+        for (var item of data) {
+          // Category Header create karna
+          var categoryDiv = document.createElement('div');
+          categoryDiv.className = 'mt-4 mb-2';
+          categoryDiv.innerHTML = `<h2 class="border-bottom pb-2">${item.Category}</h2>`;
+          catalogContainer.appendChild(categoryDiv);
+
+          // Products Row create karna
+          var row = document.createElement('div');
+          row.className = 'row';
+
+          for (var product of item.Products) {
+            var col = document.createElement('div');
+            col.className = 'col-md-3 col-sm-6 mb-4';
+
+            // Card structure with accessibility fixes
+            col.innerHTML = `
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body text-center">
+                                <img src="${product.Photo}" class="food-img img-fluid mb-3" alt="${product.Name}">
+                                <h5 class="card-title">${product.Name}</h5>
+                                <p class="price-text">&#8377; ${product.Price.toLocaleString('en-IN')}</p>
+                            </div>
+                            <div class="card-footer bg-white border-0 text-center">
+                                <div class="form-check d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="radio" name="selection" id="id_${product.Name.replace(/\s/g, '')}" value="${product.Name}">
+                                    <label class="form-check-label ms-2" for="id_${product.Name.replace(/\s/g, '')}">
+                                        Select Item
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+            row.appendChild(col);
+          }
+          catalogContainer.appendChild(row);
+        }
+      }
+    </script>
+  </head>
+  <body onload="bodyload()" class="container-fluid p-4">
+    <header class="text-center mb-5 bg-danger text-white p-4 rounded shadow">
+      <h1>KFC Digital Menu</h1>
+      <p>Explore our categories and best sellers</p>
+    </header>
+
+    <section id="catalogContainer"></section>
+
+    <div class="text-center mt-5">
+      <button
+        class="btn btn-dark btn-lg px-5 shadow"
+        data-bs-toggle="modal"
+        data-bs-target="#billSummary"
+      >
+        Confirm Your Selection
+      </button>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
