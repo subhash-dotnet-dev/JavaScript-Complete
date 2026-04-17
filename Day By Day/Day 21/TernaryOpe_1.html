@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Toggle Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at top left, #e04bdb, #15db78);
+            color: white;
+        }
+
+        .calc-card {
+            background: var(--card-bg);
+            /* Safari & Modern Browser Fix */
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            padding: 40px;
+            border-radius: 28px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 28px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            /* Gradient Text Compatibility */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        #btnPreview {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+        }
+
+        #btnPreview:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        #container {
+            margin-top: 25px;
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* Smooth Transition Logic */
+            max-height: 0;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #container.active {
+            max-height: 400px;
+            opacity: 1;
+            transform: scale(1);
+            padding: 10px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            object-fit: cover;
+        }
+
+        .res-item {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        /* Moving Inline styles to CSS */
+        .label-muted { color: var(--text-muted); }
+        .val-highlight { color: var(--primary); font-weight: 600; }
+    </style>
+</head>
+<body onload="bodyload()">
+
+    <div class="calc-card">
+        <h2>Smart Preview</h2>
+
+        <button onclick="TogglePreview()" id="btnPreview">Show Preview</button>
+
+        <div id="container">
+            <img src="../../src/assets/images/man.jpg" alt="Product Image">
+        </div>
+
+        <div class="res-item">
+            <span class="label-muted">Status:</span>
+            <span class="val-highlight" id="status">Hidden</span>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let isVisible = false;
+
+        function bodyload() {
+            // Initializing the button text
+            document.getElementById("btnPreview").innerHTML = "Show Preview";
+        }
+
+        function TogglePreview() {
+            const btn = document.getElementById("btnPreview");
+            const container = document.getElementById("container");
+            const status = document.getElementById("status");
+
+            // Toggle state
+            isVisible = !isVisible;
+
+            // Ternary logic for clean code
+            btn.innerHTML = isVisible ? "Hide Preview" : "Show Preview";
+            status.innerHTML = isVisible ? "Viewing" : "Hidden";
+
+            // Class toggle for smooth animation
+            if (isVisible) {
+                container.classList.add("active");
+            } else {
+                container.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>
