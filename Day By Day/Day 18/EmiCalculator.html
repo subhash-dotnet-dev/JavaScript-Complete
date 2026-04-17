@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMI Calculator</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #38bdf8;
+        --secondary: #818cf8;
+        --bg: #0f172a;
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --text-muted: #94a3b8;
+        --success: #4ade80;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at top left, #31b72a, #948f0b);
+        color: white;
+      }
+
+      .calc-card {
+        background: var(--card-bg);
+        /* Safari Compatibility Fixes */
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        padding: 40px;
+        border-radius: 24px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 26px;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        /* Gradient Text Compatibility Fixes */
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        font-weight: 700;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px;
+        background: rgba(42, 15, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: white;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
+      }
+
+      .result-box {
+        margin-top: 30px;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .emi-display {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .emi-label {
+        display: block;
+        color: var(--text-muted);
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      .emi-val {
+        font-size: 34px;
+        font-weight: 700;
+        color: var(--success);
+        text-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
+      }
+
+      .divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 20px 0;
+      }
+
+      .res-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .res-item span:first-child {
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+
+      .val {
+        font-weight: 600;
+        color: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calc-card">
+      <h2>EMI Calculator</h2>
+
+      <div class="form-group">
+        <label>Loan Amount (₹)</label>
+        <input
+          type="number"
+          id="loanAmount"
+          placeholder="e.g. 500000"
+          oninput="calculateEMI()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Interest Rate (% P.A.)</label>
+        <input
+          type="number"
+          id="interestRate"
+          step="0.1"
+          placeholder="e.g. 8.5"
+          oninput="calculateEMI()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Tenure (Months)</label>
+        <input
+          type="number"
+          id="tenure"
+          placeholder="e.g. 24"
+          oninput="calculateEMI()"
+        />
+      </div>
+
+      <div class="result-box">
+        <div class="emi-display">
+          <span class="emi-label">Monthly Installment</span>
+          <span class="emi-val" id="emiDisplay">₹ 0</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="res-item">
+          <span>Total Interest</span>
+          <span class="val" id="interestDisplay">₹ 0</span>
+        </div>
+        <div class="res-item">
+          <span>Total Payable</span>
+          <span class="val" id="totalDisplay">₹ 0</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function calculateEMI() {
+        const P = parseFloat(document.getElementById('loanAmount').value);
+        const rate = parseFloat(document.getElementById('interestRate').value);
+        const N = parseFloat(document.getElementById('tenure').value);
+
+        if (P > 0 && rate > 0 && N > 0) {
+          const R = rate / 12 / 100;
+
+          // EMI Calculation Formula
+          const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+          const totalPayable = emi * N;
+          const totalInt = totalPayable - P;
+
+          // Format with Indian Currency System
+          const formatter = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+          });
+
+          document.getElementById('emiDisplay').innerText =
+            formatter.format(emi);
+          document.getElementById('interestDisplay').innerText =
+            formatter.format(totalInt);
+          document.getElementById('totalDisplay').innerText =
+            formatter.format(totalPayable);
+        } else {
+          document.getElementById('emiDisplay').innerText = '₹ 0';
+          document.getElementById('interestDisplay').innerText = '₹ 0';
+          document.getElementById('totalDisplay').innerText = '₹ 0';
+        }
+      }
+    </script>
+  </body>
+</html>
