@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazon Login - Clean Code</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+        margin: 0;
+      }
+
+      .logo {
+        width: 103px;
+        margin-bottom: 18px;
+        cursor: pointer;
+      }
+
+      .login-card {
+        width: 350px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px 26px;
+        box-sizing: border-box;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 28px;
+        font-weight: 400;
+        margin: 0 0 15px 0;
+      }
+
+      label {
+        font-size: 13px;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #a6a6a6;
+        border-radius: 3px;
+        box-sizing: border-box;
+        outline: none;
+        transition: 0.2s;
+      }
+
+      input:focus {
+        border-color: #e77600;
+        box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
+      }
+
+      .btn-amazon {
+        width: 100%;
+        padding: 10px 0;
+        background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+        border: 1px solid #a88734;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+
+      .btn-amazon:hover {
+        background: #f0c14b;
+        border-color: #846a29;
+      }
+
+      .error-alert {
+        display: none;
+        color: #c40000;
+        font-size: 13px;
+        padding: 12px;
+        border: 1px solid #c40000;
+        background: #fffafa;
+        border-radius: 4px;
+        margin-bottom: 20px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* Yahan Maine Warnings Solve Ki Hai */
+      .password-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .forgot-link {
+        font-size: 12px;
+        color: #0066c0;
+        text-decoration: none;
+      }
+
+      .forgot-link:hover {
+        text-decoration: underline;
+      }
+
+      .user-pill {
+        background: #f3f3f3;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 13px;
+        margin-bottom: 15px;
+        display: inline-block;
+      }
+
+      .info-text {
+        font-size: 12px;
+        line-height: 1.5;
+        color: #111;
+        margin-top: 18px;
+      }
+
+      .footer-links {
+        font-size: 11px;
+        color: #0066c0;
+        margin-top: 30px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
+      alt="Amazon"
+      class="logo"
+    />
+
+    <div class="login-card">
+      <div id="error-box" class="error-alert"></div>
+
+      <div id="step-id">
+        <h1>Sign in</h1>
+        <label>Email or mobile phone number</label>
+        <input
+          type="text"
+          id="user-input"
+          placeholder="subhash.dev79@gmail.com or 8969556855"
+        />
+        <button class="btn-amazon" onclick="checkUser()">Continue</button>
+        <p class="info-text">
+          By continuing, you agree to Amazon's Conditions of Use and Privacy
+          Notice.
+        </p>
+      </div>
+
+      <div id="step-pass" class="hidden">
+        <h1>Sign in</h1>
+        <div class="user-pill" id="display-user"></div>
+
+        <div class="password-header">
+          <label>Password</label>
+          <a href="#" class="forgot-link">Forgot Password?</a>
+        </div>
+
+        <input
+          type="password"
+          id="password-input"
+          placeholder="Enter Password"
+        />
+        <button class="btn-amazon" onclick="checkFinalLogin()">Sign in</button>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      Conditions of Use &nbsp; Privacy Notice &nbsp; Help
+    </div>
+
+    <script>
+      const MY_EMAIL = 'subhash.dev79@gmail.com';
+      const MY_MOBILE = '8969556855';
+      const MY_PASS = 'Subhash@123';
+
+      const errorBox = document.getElementById('error-box');
+
+      function showError(msg) {
+        errorBox.innerText = msg;
+        errorBox.style.display = 'block';
+      }
+
+      function checkUser() {
+        const val = document.getElementById('user-input').value.trim();
+        errorBox.style.display = 'none';
+
+        if (val === '') {
+          showError('! Enter your email or mobile phone number');
+        } else if (val === MY_EMAIL || val === MY_MOBILE) {
+          document.getElementById('display-user').innerText = val;
+          document.getElementById('step-id').classList.add('hidden');
+          document.getElementById('step-pass').classList.remove('hidden');
+        } else {
+          showError('! Account not found. Try your specific credentials.');
+        }
+      }
+
+      function checkFinalLogin() {
+        const pass = document.getElementById('password-input').value;
+        if (pass === MY_PASS) {
+          alert('✅ Login Successful, Subhash!');
+          window.location.reload();
+        } else {
+          showError('! Incorrect password.');
+        }
+      }
+    </script>
+  </body>
+</html>
